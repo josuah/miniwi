@@ -7,6 +7,10 @@ thumb]] font (thank you, Robey!).
 
 On a 320x240 raspberry screen, it can display 80x30 (2400) characters.
 
+Then on my laptop screen...
+
+./screenshot.png
+
 It support ASCII, a few accents, most box-drawing characters, and all
 braille characters to make it suitable for
 [[https://github.com/asciimoo/drawille][drawille]].
