@@ -1,0 +1,14 @@
+#+title: Miniwi font
+
+This is a font in a 8x4 format (including spaces), made from scratch,
+but with inspiration from the
+[[http://robey.lag.net/2010/01/23/tiny-monospace-font.html][tom
+thumb]] font (thank you, Robey!).
+
+On a 320x240 raspberry screen, it can display 80x30 (2400) characters.
+
+It support ASCII, a few accents, most box-drawing characters, and all
+braille characters to make it suitable for
+[[https://github.com/asciimoo/drawille][drawille]].
+
+Copyright 2016 Josuah Demangeon
