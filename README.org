@@ -1,5 +1,7 @@
 #+title: Miniwi font
 
+[[./preview.png]]
+
 This is a font in a 8x4 format (including spaces), made from scratch,
 but with inspiration from the
 [[http://robey.lag.net/2010/01/23/tiny-monospace-font.html][tom

@@ -7,8 +7,8 @@ Copyright: Copyright (c) 2016, sshbio
 UComments: "2016-1-6: Created with FontForge (http://fontforge.org)"
 Version: 001.000
 ItalicAngle: 0
-UnderlinePosition: -0.8
-UnderlineWidth: 0.4
+UnderlinePosition: -1
+UnderlineWidth: 1
 Ascent: 6
 Descent: 2
 InvalidEm: 0
@@ -22,7 +22,12 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1452046449
-ModificationTime: 1452051539
+ModificationTime: 1452133281
+PfmFamily: 17
+TTFWeight: 400
+TTFWidth: 5
+LineGap: 1
+VLineGap: 0
 OS2TypoAscent: 0
 OS2TypoAOffset: 1
 OS2TypoDescent: 0
@@ -36,18 +41,21 @@ HheadAscent: 0
 HheadAOffset: 1
 HheadDescent: 0
 HheadDOffset: 1
+OS2Vendor: 'PfEd'
 MarkAttachClasses: 1
 DEI: 91125
+LangName: 1033 "" "" "" "" "" "" "" "" "" "" "" "" "" "Copyright (c) 2016, Josuah Demangeon (josuah.demangeon@gmail.com),+AAoA-with Reserved Font Name miniwi.+AAoACgAA-This Font Software is licensed under the SIL Open Font License, Version 1.1.+AAoA-This license is copied below, and is also available with a FAQ at:+AAoA-http://scripts.sil.org/OFL+AAoACgAK------------------------------------------------------------+AAoA-SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007+AAoA------------------------------------------------------------+AAoACgAA-PREAMBLE+AAoA-The goals of the Open Font License (OFL) are to stimulate worldwide+AAoA-development of collaborative font projects, to support the font creation+AAoA-efforts of academic and linguistic communities, and to provide a free and+AAoA-open framework in which fonts may be shared and improved in partnership+AAoA-with others.+AAoACgAA-The OFL allows the licensed fonts to be used, studied, modified and+AAoA-redistributed freely as long as they are not sold by themselves. The+AAoA-fonts, including any derivative works, can be bundled, embedded, +AAoA-redistributed and/or sold with any software provided that any reserved+AAoA-names are not used by derivative works. The fonts and derivatives,+AAoA-however, cannot be released under any other type of license. The+AAoA-requirement for fonts to remain under this license does not apply+AAoA-to any document created using the fonts or their derivatives.+AAoACgAA-DEFINITIONS+AAoAIgAA-Font Software+ACIA refers to the set of files released by the Copyright+AAoA-Holder(s) under this license and clearly marked as such. This may+AAoA-include source files, build scripts and documentation.+AAoACgAi-Reserved Font Name+ACIA refers to any names specified as such after the+AAoA-copyright statement(s).+AAoACgAi-Original Version+ACIA refers to the collection of Font Software components as+AAoA-distributed by the Copyright Holder(s).+AAoACgAi-Modified Version+ACIA refers to any derivative made by adding to, deleting,+AAoA-or substituting -- in part or in whole -- any of the components of the+AAoA-Original Version, by changing formats or by porting the Font Software to a+AAoA-new environment.+AAoACgAi-Author+ACIA refers to any designer, engineer, programmer, technical+AAoA-writer or other person who contributed to the Font Software.+AAoACgAA-PERMISSION & CONDITIONS+AAoA-Permission is hereby granted, free of charge, to any person obtaining+AAoA-a copy of the Font Software, to use, study, copy, merge, embed, modify,+AAoA-redistribute, and sell modified and unmodified copies of the Font+AAoA-Software, subject to the following conditions:+AAoACgAA-1) Neither the Font Software nor any of its individual components,+AAoA-in Original or Modified Versions, may be sold by itself.+AAoACgAA-2) Original or Modified Versions of the Font Software may be bundled,+AAoA-redistributed and/or sold with any software, provided that each copy+AAoA-contains the above copyright notice and this license. These can be+AAoA-included either as stand-alone text files, human-readable headers or+AAoA-in the appropriate machine-readable metadata fields within text or+AAoA-binary files as long as those fields can be easily viewed by the user.+AAoACgAA-3) No Modified Version of the Font Software may use the Reserved Font+AAoA-Name(s) unless explicit written permission is granted by the corresponding+AAoA-Copyright Holder. This restriction only applies to the primary font name as+AAoA-presented to the users.+AAoACgAA-4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font+AAoA-Software shall not be used to promote, endorse or advertise any+AAoA-Modified Version, except to acknowledge the contribution(s) of the+AAoA-Copyright Holder(s) and the Author(s) or with their explicit written+AAoA-permission.+AAoACgAA-5) The Font Software, modified or unmodified, in part or in whole,+AAoA-must be distributed entirely under this license, and must not be+AAoA-distributed under any other license. The requirement for fonts to+AAoA-remain under this license does not apply to any document created+AAoA-using the Font Software.+AAoACgAA-TERMINATION+AAoA-This license becomes null and void if any of the above conditions are+AAoA-not met.+AAoACgAA-DISCLAIMER+AAoA-THE FONT SOFTWARE IS PROVIDED +ACIA-AS IS+ACIA, WITHOUT WARRANTY OF ANY KIND,+AAoA-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF+AAoA-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT+AAoA-OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE+AAoA-COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,+AAoA-INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL+AAoA-DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING+AAoA-FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM+AAoA-OTHER DEALINGS IN THE FONT SOFTWARE." "http://scripts.sil.org/OFL"
 Encoding: UnicodeBmp
 UnicodeInterp: none
 NameList: AGL For New Fonts
 DisplaySize: 8
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 0 54 16
+WinInfo: 9396 54 16
 OnlyBitmaps: 1
 BeginPrivate: 0
 EndPrivate
+TeXData: 1 0 0 524288 262144 174762 0 1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
 BeginChars: 65536 674
 
 StartChar: exclam
@@ -1572,9 +1580,8 @@ EndChar
 
 StartChar: threequarters
 Encoding: 190 190 190
-Width: 4
+Width: 8
 VWidth: 0
-Flags: W
 LayerCount: 2
 EndChar
 
@@ -5441,9 +5448,9 @@ LayerCount: 2
 EndChar
 EndChars
 BitmapFont: 8 675 6 2 1 
-BDFStartProperties: 29
-FONT 1 "-FontForge-miniwi-Regular-R-Normal--8-80-75-75-C-0-ISO10646-1"
-COMMENT 0 "Copyright (c) 2016, sshbio"
+BDFStartProperties: 36
+FONT 1 "-sshbio-miniwi-Regular-R-Normal--8-80-75-75-C-40-ISO10646-1"
+COMMENT 0 "Copyright (c) 2016, Josuah Demangeon"
 FOUNDRY 16 "FontForge"
 FAMILY_NAME 16 "miniwi"
 WEIGHT_NAME 16 "Regular"
@@ -5452,25 +5459,32 @@ SETWIDTH_NAME 16 "Normal"
 ADD_STYLE_NAME 16 ""
 PIXEL_SIZE 18 8
 POINT_SIZE 18 80
-RESOLUTION_X 19 75
-RESOLUTION_Y 19 75
+RESOLUTION_X 19 4
+RESOLUTION_Y 19 8
 SPACING 16 "C"
-AVERAGE_WIDTH 18 0
+AVERAGE_WIDTH 18 4
 CHARSET_REGISTRY 16 "ISO10646"
 CHARSET_ENCODING 16 "1"
 FONTNAME_REGISTRY 16 ""
-CHARSET_COLLECTIONS 16 "ISO10646-1"
+CHARSET_COLLECTIONS 16 "ASCII ISOLatin1Encoding ISO10646-1"
 FONT_NAME 16 "miniwi"
 FACE_NAME 16 "miniwi"
 COPYRIGHT 16 "Copyright (c) 2016, sshbio"
-FONT_VERSION 16 "001.000"
+FONT_VERSION 16 "1.0"
 FONT_ASCENT 18 6
 FONT_DESCENT 18 2
 UNDERLINE_POSITION 18 -1
 UNDERLINE_THICKNESS 18 1
-RAW_ASCENT 18 750
-RAW_DESCENT 18 250
-FIGURE_WIDTH 18 -1
+X_HEIGHT 18 3
+CAP_HEIGHT 18 4
+RAW_ASCENT 18 6
+RAW_DESCENT 18 2
+NORM_SPACE 18 4
+RELATIVE_WEIGHT 19 1
+RELATIVE_SETWIDTH 19 4
+FIGURE_WIDTH 18 4
+AVG_LOWERCASE_WIDTH 18 4
+AVG_UPPERCASE_WIDTH 18 4
 BDFEndProperties
 Resolution: 75
 BDFChar: 0 33 4 1 1 0 4
@@ -5604,7 +5618,7 @@ i#k8b5QCca
 BDFChar: 64 64 4 0 2 0 4
 ^`];C5QCca
 BDFChar: 65 65 4 0 2 0 4
-5bOe.TE"rl
+i1Qb$TE"rl
 BDFChar: 66 66 4 0 2 0 4
 ^nAK9^]4?7
 BDFChar: 67 67 4 0 2 0 4
@@ -5634,7 +5648,7 @@ T]"bdTE"rl
 BDFChar: 79 79 4 0 2 0 4
 5bOdC5QCca
 BDFChar: 80 80 4 0 2 0 4
-^nAJnJ,fQL
+i1T"YJ,fQL
 BDFChar: 81 81 4 0 2 0 4
 5bOe.?iU0,
 BDFChar: 82 82 4 0 2 0 4
@@ -5667,64 +5681,64 @@ BDFChar: 95 95 4 2 2 4 4
 z
 BDFChar: 96 96 4 0 1 4 5
 J3X)7
-BDFChar: 97 97 4 0 2 0 2
-@%cEX
+BDFChar: 97 97 4 0 2 0 3
+i#pt9
 BDFChar: 98 98 4 0 2 0 4
-J:PG.huE`W
-BDFChar: 99 99 4 0 2 0 2
-i.0_c
+JDd)nhuE`W
+BDFChar: 99 99 4 0 2 0 3
+i.-@9
 BDFChar: 100 100 4 0 2 0 4
-+<Y'bhuE`W
++Q/ochuE`W
 BDFChar: 101 101 4 0 2 0 3
-@,QQC
+i8B.D
 BDFChar: 102 102 4 0 2 0 4
-+@+jM5QCca
-BDFChar: 103 103 4 0 2 -2 2
-@%cF#^]4?7
+?pNX85QCca
+BDFChar: 103 103 4 0 2 -2 3
+i1Qb$+Q*5"
 BDFChar: 104 104 4 0 2 0 4
-J:PG.TE"rl
+JDd)nTE"rl
 BDFChar: 105 105 4 1 1 0 4
 J,k+MJ,fQL
 BDFChar: 106 106 4 0 1 -2 4
 5QF&75X9i"
 BDFChar: 107 107 4 0 2 0 4
-J:O<.TE"rl
+J=rRNTE"rl
 BDFChar: 108 108 4 1 2 0 4
-J:N0#5QCca
-BDFChar: 109 109 4 0 2 0 2
-i8C7.
-BDFChar: 110 110 4 0 2 0 2
-^n@>#
-BDFChar: 111 111 4 0 2 0 2
-i1T!.
-BDFChar: 112 112 4 0 2 -2 2
-^nBV9J,fQL
-BDFChar: 113 113 4 0 2 -2 2
-@%cF#+92BA
-BDFChar: 114 114 4 0 2 0 2
-i.-=X
-BDFChar: 115 115 4 0 2 0 2
-?pML-
+J:N0#^]4?7
+BDFChar: 109 109 4 0 2 0 3
+i8EOd
+BDFChar: 110 110 4 0 2 0 3
+i1Qa9
+BDFChar: 111 111 4 0 2 0 3
+i1Qb$
+BDFChar: 112 112 4 0 2 -2 3
+i1Qb$J:IV"
+BDFChar: 113 113 4 0 2 -2 3
+i1Qb$+<UXa
+BDFChar: 114 114 4 0 2 0 3
+i.-?.
+BDFChar: 115 115 4 0 2 0 3
+i.)s.
 BDFChar: 116 116 4 1 2 0 4
 JA?\c^]4?7
-BDFChar: 117 117 4 0 2 0 2
-TV13C
-BDFChar: 118 118 4 0 2 0 2
-TV+OM
-BDFChar: 119 119 4 0 2 0 2
-T]"`.
-BDFChar: 120 120 4 0 2 0 2
-TKo.M
-BDFChar: 121 121 4 0 2 -2 2
-TV13c^]4?7
-BDFChar: 122 122 4 0 2 0 2
-^d)9-
+BDFChar: 117 117 4 0 2 0 3
+TV.t9
+BDFChar: 118 118 4 0 2 0 3
+TV.rC
+BDFChar: 119 119 4 0 2 0 3
+T]"bd
+BDFChar: 120 120 4 0 2 0 3
+TKkc8
+BDFChar: 121 121 4 0 2 -2 3
+TV.t9+M[sW
+BDFChar: 122 122 4 0 2 0 3
+i#mR.
 BDFChar: 123 123 4 0 2 -1 5
-+@&2B5X6Fl
+?pHu-5X8]W
 BDFChar: 124 124 4 1 1 -1 5
 J:N0#J:N.M
 BDFChar: 125 125 4 0 2 -1 5
-J3Z@B5X9i"
+^d(.-5X<*b
 BDFChar: 126 126 4 0 2 4 5
 ^gI-B
 BDFChar: 127 127 4 0 0 0 0
@@ -5795,8 +5809,8 @@ BDFChar: 159 159 4 0 0 0 0
 z
 BDFChar: 160 160 4 0 0 0 0
 z
-BDFChar: 161 161 4 0 0 0 0
-z
+BDFChar: 161 161 4 1 1 -1 3
+J,k+MJ,fQL
 BDFChar: 162 162 4 0 2 -1 3
 5i@1N5QCca
 BDFChar: 163 163 4 0 2 0 4
@@ -5813,8 +5827,8 @@ BDFChar: 168 168 4 0 2 4 4
 TE"rl
 BDFChar: 169 169 4 0 3 -2 4
 @$'m)n;q#X
-BDFChar: 170 170 4 0 2 0 4
-@%cEXhuE`W
+BDFChar: 170 170 4 0 2 0 5
+i#pt9!8mhW
 BDFChar: 171 171 4 0 3 -1 3
 :nXJS:]LIq
 BDFChar: 172 172 4 0 2 0 1
@@ -5852,25 +5866,25 @@ TMSH]TE"rl
 BDFChar: 188 188 4 0 3 0 5
 J:N/HE"E!L
 BDFChar: 189 189 4 0 3 0 5
-J:O:(+><cq
+J:Oj8+><cq
 BDFChar: 190 190 4 0 3 0 5
-^d,,CYRgd7
+^d.C.n.5R"
 BDFChar: 191 191 4 0 2 -2 2
 5QF'"huE`W
 BDFChar: 192 192 4 0 2 0 5
-J3`%ci1L&M
+^]<;ci1L&M
 BDFChar: 193 193 4 0 2 0 5
-+@+kXi1L&M
+?i],Xi1L&M
 BDFChar: 194 194 4 0 2 0 5
-5bLB8i1L&M
+huM].i1L&M
 BDFChar: 195 195 4 0 2 0 5
-@),%#i1L&M
+@)1]ni1L&M
 BDFChar: 196 196 4 0 2 0 5
 TE*oCi1L&M
 BDFChar: 197 197 4 0 2 0 5
-i8?kni1L&M
+5bLB8i1L&M
 BDFChar: 198 198 4 0 3 0 4
-E1l]nYQ+Y'
+n=]9DYQ+Y'
 BDFChar: 199 199 4 0 2 -2 4
 @"<cX?pML-
 BDFChar: 200 200 4 0 2 0 5
@@ -5905,8 +5919,8 @@ BDFChar: 214 214 4 0 2 0 5
 TE%6MTKiJW
 BDFChar: 215 215 4 0 2 1 3
 TKo.M
-BDFChar: 216 216 4 0 2 -1 4
-+Q229i.(e-
+BDFChar: 216 216 4 0 2 -1 5
++CLl#TYQ'X
 BDFChar: 217 217 4 0 2 0 5
 ^]:%#T\oeM
 BDFChar: 218 218 4 0 2 0 5
@@ -5922,29 +5936,29 @@ J:QRNi.-=X
 BDFChar: 223 223 4 0 2 0 4
 5bPoc^]4?7
 BDFChar: 224 224 4 0 2 0 5
-J3X*BT\oeM
+^]<:8i8=S8
 BDFChar: 225 225 4 0 2 0 5
-+@#p7T\oeM
+?i]+-i8=S8
 BDFChar: 226 226 4 0 2 0 5
-5bJ*bT\oeM
+huM[Xi8=S8
 BDFChar: 227 227 4 0 2 0 5
-^gI.MT\oeM
-BDFChar: 228 228 4 0 2 0 4
-TE&AmhuE`W
+^gQ(Ci8=S8
+BDFChar: 228 228 4 0 2 0 5
+TE*mmi8=S8
 BDFChar: 229 229 4 0 2 0 5
-i8=TCT\oeM
+5bR$Xi8=S8
 BDFChar: 230 230 4 0 3 0 3
-E3Q#)
-BDFChar: 231 231 4 0 2 -2 2
-i.0`N^]4?7
+n?AST
+BDFChar: 231 231 4 0 2 -2 3
+i.-@95em@"
 BDFChar: 232 232 4 0 2 0 5
-^]7d#J7&?W
+^]<<NJD^D-
 BDFChar: 233 233 4 0 2 0 5
-?iXTmJ7&?W
+?i]-CJD^D-
 BDFChar: 234 234 4 0 2 0 5
-huI0CJ7&?W
+huM]nJD^D-
 BDFChar: 235 235 4 0 2 0 5
-TE&BXJ7&?W
+TE*p.JD^D-
 BDFChar: 236 236 4 0 1 0 5
 J3X*"5X5;L
 BDFChar: 237 237 4 1 2 0 5
@@ -5956,35 +5970,35 @@ TE%5B5QCca
 BDFChar: 240 240 4 0 2 0 5
 ^gI0#T\oeM
 BDFChar: 241 241 4 0 2 0 5
-^gI/XTV)8b
+^gI0#TV)8b
 BDFChar: 242 242 4 0 2 0 5
-J3X+mT\oeM
+^]<;cT\oeM
 BDFChar: 243 243 4 0 2 0 5
-+@#qbT\oeM
+?i],XT\oeM
 BDFChar: 244 244 4 0 2 0 5
-5bJ,8T\oeM
+huM].T\oeM
 BDFChar: 245 245 4 0 2 0 5
-^gI0#T\oeM
-BDFChar: 246 246 4 0 2 0 4
-TE*oChuE`W
+^gQ)nT\oeM
+BDFChar: 246 246 4 0 2 0 5
+TE*oCT\oeM
 BDFChar: 247 247 4 0 2 -1 3
 5QK^B5QCca
 BDFChar: 248 248 4 0 2 -1 3
 +Q229J,fQL
 BDFChar: 249 249 4 0 2 0 5
-J3X+-T\oeM
+^]:%#T\oeM
 BDFChar: 250 250 4 0 2 0 5
-+@#q"T\oeM
+?iZjmT\oeM
 BDFChar: 251 251 4 0 2 0 5
-5bJ+MT\oeM
-BDFChar: 252 252 4 0 2 0 4
-TE(XXhuE`W
+huKFCT\oeM
+BDFChar: 252 252 4 0 2 0 5
+TE(XXT\oeM
 BDFChar: 253 253 4 0 2 -2 5
-+@#q"T\ps.
-BDFChar: 254 254 4 0 2 -2 4
-J:PG.i.-=X
-BDFChar: 255 255 4 0 2 -2 4
-TE(XXi#of8
+?iZjmT\psN
+BDFChar: 254 254 4 0 2 -1 4
+JDd)ni.(e-
+BDFChar: 255 255 4 0 2 -2 5
+TE(XXT\psN
 BDFChar: 256 9472 4 0 3 1 1
 n,NFg
 BDFChar: 257 9473 4 0 3 1 2
@@ -6157,20 +6171,20 @@ BDFChar: 340 9556 4 0 3 -2 2
 n:7a9TE"rl
 BDFChar: 341 9557 4 0 1 -2 2
 ^d,\#5QCca
-BDFChar: 342 9558 4 0 3 -2 1
-n5)qX
-BDFChar: 343 9559 4 0 3 -2 3
-n.<rC:f%,l
+BDFChar: 342 9558 4 0 2 -2 1
+i1Qa9
+BDFChar: 343 9559 4 0 2 -2 2
+i#n\cTE"rl
 BDFChar: 344 9560 4 1 3 0 5
 J:N1.JD^D-
-BDFChar: 345 9561 4 0 3 0 5
-TV.sNT^Vp]
+BDFChar: 345 9561 4 0 3 1 5
+TV.sNn,NFg
 BDFChar: 346 9562 4 0 3 0 5
 TV.s^JFEO=
-BDFChar: 347 9563 4 0 2 0 5
-+<Vfb+Q*5"
-BDFChar: 348 9564 4 0 2 0 5
-TV.sNT\oeM
+BDFChar: 347 9563 4 0 1 0 5
+5X7TM5em@"
+BDFChar: 348 9564 4 0 2 1 5
+TV.sNhuE`W
 BDFChar: 349 9565 4 0 2 0 5
 TV.sN+Q*5"
 BDFChar: 350 9566 4 1 3 -2 5
@@ -6179,12 +6193,12 @@ BDFChar: 351 9567 4 0 3 -2 5
 TV.sNYb7Y^
 BDFChar: 352 9568 4 0 3 -2 5
 TV.s^J?Y]>
-BDFChar: 353 9569 4 0 2 -2 5
-+<Vfb+Q+@b
+BDFChar: 353 9569 4 0 1 -2 5
+5X7TM5eoWM
 BDFChar: 354 9570 4 0 2 -2 5
 TV.sNTV.sN
 BDFChar: 355 9571 4 0 2 -2 5
-TV.sNTV.sN
+TV.sN+J>C#
 BDFChar: 356 9572 4 0 3 -2 2
 n,VrC5QCca
 BDFChar: 357 9573 4 0 3 -2 1
