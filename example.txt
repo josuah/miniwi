@@ -1,0 +1,66 @@
+ ┌────────────────────────────────┬──────────────────────────────────────┬────────────────────────────────────┐
+ │ ASCII                          │ Accents                              │ The Last Question - Isaac Asimov   │
+ ├────────────────────────────────┼──────────────────────────────────────┼────────────────────────────────────┤
+ │ `~ !@#$%^&* +=-_ ,. ;:         │ à, ç, é, è, í, ï, ó, ò, ú, ü         │ The last question was asked for    │	  
+ │ 0123456789 {}()[]<>\|/ ?       │ č, ď, ě, ň, ř, š, ť, ž               │ the first time, half in jest, on   │
+ │ ABCDEFGHIJKLMNOPQRSTUVWXYZ     │ xḃ, ċ, ḋ, ḟ, ġ, ṁ, ṗ, ṡ, ṫ           │ May 21, 2061, at a time when	      │
+ │ abcdefghijklmnopqrstuvwxyz     │                                      │ humanity first stepped into the    │	  
+ ├────────────────────────────────┴──────────────────────────────────────┤ light. The question came about as  │
+ │ Cyrilic                                                               │ a result of a five- dollar bet     │	  
+ ├───────────────────────────────────────────────────────────────────────┤ over highballs, and it happened    │	  
+ │ А Б В Г Ґ Д Ђ Ѓ Е Ё Є Ж З З Ѕ И І Ї Й Ј К Л Љ М Н Њ О П Р С С Т Ћ Ќ У │ this way:			      │
+ │ Ў Ф Х Ц Ч Џ Ш Щ Ъ Ы Ь Э Ю Я                                           │ 				      │
+ ├───────────────────────────────────────────────────────────────────────┤ Alexander Adell and Bertram Lupov  │
+ │ Hebrew                                                                │ were two of the faithful	      │
+ ├───────────────────────────────────────────────────────────────────────┤ attendants of Multivac. As well as │
+ │ • א ב ג ד ה ו ז ח ט י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק ר ש ת               │ any human beings could, they knew  │
+ ├────────────────────────────────┬──────────────────────────────────────┤ what lay behind the cold,	      │
+ │ Box Drawing                    │ Braille for Drawille                 │ clicking, flashing face -- miles   │
+ ├────────────────────────────────┼──────────────────────────────────────┤ and miles of face -- of that giant │
+ │ ┌─┬┐  ╔═╦╗  ╓─╥╖  ╒═╤╕         │⠀⠀⠀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ computer. They had at least a      │	                                
+ │ │ ││  ║ ║║  ║ ║║  │ ││         │⠀⢀⠎⠁⠀⠀⠈⠉⠒⠦⢀⡀⡄⡤⡤⡤⡤⡤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ vague notion of the general plan   │                             
+ │ ├─┼┤  ╠═╬╣  ╟─╫╢  ╞═╪╡         │⠀⡎⡠⠒⠉⠉⢑⢲⢀⠀⠀⠈⠪⢣⢫⡺⣹⡹⣝⠾⣻⣶⣤⡀⠀⠀⠀⠀⠀⠀        │ of relays and circuits that had    │	                                   
+ │ └─┴┘  ╚═╩╝  ╙─╨╜  ╘═╧╛         │⠀⢿⡅⠀⠠⡰⡊⡎⡪⢊⠢⡠⢀⠀⠘⠜⣜⢎⡯⣳⠀⠳⣻⣿⣷⡄⠀⠀⠀⠀        │ long since grown past the point    │	                                    
+ │ ┌───────────────────┐          │⠀⢹⣇⡠⠫⡪⡊⡢⢊⠨⠨⡂⢕⢐⠄⡀⠈⢺⢸⣝⡆⠀⢻⣷⣿⣿⣦⡀⠀⠀        │ where any single human could	      │                              
+ │ │  ╔═══╗ Some Text  │▒         │⠀⠈⣟⢪⢇⠀⠑⠌⠢⠡⡃⠢⡑⡐⢅⢇⢆⠀⠑⢕⣯⡀⠀⢿⣿⣿⣿⣷⡀⠀        │ possibly have a firm grasp of the  │                                 
+ │ │  ╚═╦═╝ in the box │▒         │⠀⣐⢵⢣⢻⣦⣀⠀⠀⠁⠈⠌⠢⡊⡜⡔⡕⡭⢆⠈⠺⡄⠀⠸⣿⣿⣿⣿⣧⠀        │ whole.			      │	  
+ │ ╞═╤══╩══╤═══════════╡▒         │⠀⣵⡫⡮⡣⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠈⠘⠘⠙⠑⠀⠀⠀⠀⢿⣿⣿⣿⣿⡀        │ 				      │                             
+ │ │ ├──┬──┤           │▒         │⠀⣗⡯⣞⢵⢽⣿⣿⣿⣟⡕⡕⡤⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⡆        │ Multivac was self-adjusting and    │	  
+ │ │ └──┴──┘           │▒         │⠀⣯⢿⣺⣝⢮⣿⣿⣿⣿⣿⡪⡮⣳⢝⡽⣲⢤⣄⡀⠀⠀⠀⠀⠈⣿⣿⣿⣿⠂        │ self-correcting. It had to be, for │                                 
+ │ └───────────────────┘▒         │⠀⢸⣿⡽⣾⣳⣻⣿⣿⣿⣿⣾⡽⣺⢵⡯⣯⣿⣳⡿⣷⣦⣄⠀⠀⢿⣿⣿⡟⠀        │ nothing human could adjust and     │	                                    
+ │  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒         │⠀⠀⢺⣿⣯⣿⣽⣿⣿⣿⣿⣿⣿⣽⣯⣟⣿⣾⣿⣿⣿⣿⣿⣿⣶⣼⣿⡿⠁⠀        │ correct it quickly enough or even  │                                 
+ │                                │⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀        │ adequately enough. So Adell and    │	                                    
+ │  ▉▊▋▌▍▎▏▁▂▃▄▅▆▇█               │⠀⠀⠀⠀⠘⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀        │ Lupov attended the monstrous giant │                                 
+ │                                │⠀⠀⠀⠀⠀⠀⠉⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠀⠀        │ only lightly and superficially,    │	                                    
+ │                                │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠻⠿⠿⠿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ yet as well as any men could.      │	  
+ ├────────────────────────────────┴──────────────────────────────────────┤ They fed it data, adjusted	      │
+ │ Block characters for semigraphics                                     │ questions to its needs and	      │
+ ├───────────────────────────────────────────────────────────────────────┤ translated the answers that were   │
+ │                      ░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░                    │ issued. Certainly they, and all    │	  
+ │                      ░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░                    │ others like them, were fully	      │
+ │     Such powerful    ░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░                    │ entitled to share in the glory     │	  
+ │                      ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░                    │ that was Multivac's.		      │
+ │                      ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░  Vim and Emacs     │ 				      │
+ │                      ░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░    So love         │ For decades, Multivac had helped   │
+ │                      ░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░     Much forbidden │ design the ships and plot the      │	  
+ │                      ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░                    │ trajectories that enabled man to   │
+ │ Very modes           ░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░                    │ reach the Moon, Mars, and Venus,   │
+ │                      ░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░                    │ but past that, Earth's poor	      │
+ │                      ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░                    │ resources could not support the    │	  
+ │                      ▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌                    │ ships. Too much energy was needed  │
+ │                      ▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░                    │ for the long trips. Earth	      │
+ │                      ░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░                    │ exploited its coal and uranium     │	  
+ │                      ░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░                    │ with increasing efficiency, but    │	  
+ │                      ░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░                    │ there was only so much of both.    │	  
+ │                      ░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░      Wow.          │ But slowly Multivac learned enough │
+ │                      ░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░                    │ to answer deeper questions more    │	  
+ │                      ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░                    │ fundamentally, and on May 14,      │	  
+ │ ██████╗  ██████╗  ██████╗ ███████╗███╗   ███╗ █████╗  ██████╗███████╗ │ 2061, what had been theory, became │
+ │ ██╔══██╗██╔═══██╗██╔════╝ ██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝ │ fact.			      │	  
+ │ ██║  ██║██║   ██║██║  ███╗█████╗  ██╔████╔██║███████║██║     ███████╗ │ 				      │
+ │ ██║  ██║██║   ██║██║   ██║██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║ │ The energy of the sun was stored,  │
+ │ ██████╔╝╚██████╔╝╚██████╔╝███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║ │ converted, and utilized directly   │
+ │ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝ │ on a planet-wide scale.  All Earth │
+ │                                                                       │ turned off its burning coal, its   │
+ └───────────────────────────────────────────────────────────────────────┴────────────────────────────────────┘
+                                                                                                               
