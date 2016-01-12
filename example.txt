@@ -46,7 +46,7 @@
  │                      ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░                    │ trajectories that enabled man to   │
  │ Very modes           ░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░                    │ reach the Moon, Mars, and Venus,   │
  │                      ░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░                    │ but past that, Earth's poor	      │
- │                      ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░                    │ resources could not support the    │	  
+ │                      ▐▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░                    │ resources could not support the    │	  
  │                      ▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌                    │ ships. Too much energy was needed  │
  │                      ▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░                    │ for the long trips. Earth	      │
  │                      ░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░                    │ exploited its coal and uranium     │	  
