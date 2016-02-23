@@ -8,23 +8,23 @@
  ├────────────────────────────────┴──────────────────────────────────────┤ light. The question came about as  │
  │ Cyrilic                                                               │ a result of a five- dollar bet     │	  
  ├───────────────────────────────────────────────────────────────────────┤ over highballs, and it happened    │	  
- │ А Б В Г Ґ Д Ђ Ѓ Е Ё Є Ж З З Ѕ И І Ї Й Ј К Л Љ М Н Њ О П Р С С Т Ћ Ќ У │ this way:			      │
- │ Ў Ф Х Ц Ч Џ Ш Щ Ъ Ы Ь Э Ю Я                                           │ 				      │
+ │ А Б В Г Ґ Д Ђ Ѓ Е Ё Є Ж З З Ѕ И І Ї Й Ј К Л Љ М Н Њ О П Р С С Т Ћ Ќ У │ this way:		        	      │
+ │ Ў Ф Х Ц Ч Џ Ш Щ Ъ Ы Ь Э Ю Я                                           │ 				                      │
  ├───────────────────────────────────────────────────────────────────────┤ Alexander Adell and Bertram Lupov  │
- │ Hebrew                                                                │ were two of the faithful	      │
+ │ Hebrew                                                                │ were two of the faithful	          │
  ├───────────────────────────────────────────────────────────────────────┤ attendants of Multivac. As well as │
  │ • א ב ג ד ה ו ז ח ט י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק ר ש ת               │ any human beings could, they knew  │
  ├────────────────────────────────┬──────────────────────────────────────┤ what lay behind the cold,	      │
  │ Box Drawing                    │ Braille for Drawille                 │ clicking, flashing face -- miles   │
  ├────────────────────────────────┼──────────────────────────────────────┤ and miles of face -- of that giant │
- │ ┌─┬┐  ╔═╦╗  ╓─╥╖  ╒═╤╕         │⠀⠀⠀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ computer. They had at least a      │	                                
- │ │ ││  ║ ║║  ║ ║║  │ ││         │⠀⢀⠎⠁⠀⠀⠈⠉⠒⠦⢀⡀⡄⡤⡤⡤⡤⡤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ vague notion of the general plan   │                             
- │ ├─┼┤  ╠═╬╣  ╟─╫╢  ╞═╪╡         │⠀⡎⡠⠒⠉⠉⢑⢲⢀⠀⠀⠈⠪⢣⢫⡺⣹⡹⣝⠾⣻⣶⣤⡀⠀⠀⠀⠀⠀⠀        │ of relays and circuits that had    │	                                   
+ │ ┌─┬┐  ╔═╦╗  ╓─╥╖  ╒═╤╕         │⠀⠀⠀⡠⡤⡤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ computer. They had at least a      │	                                
+ │ │ ││  ║ ║║  ║ ║║  │ ││         │⠀⢀⠎⠁⠀⠀⠈⠉⠒⠢⡠⡄⡄⡤⡤⡤⡤⡤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        │ vague notion of the general plan   │                             
+ │ ├─┼┤  ╠═╬╣  ╟─╫╢  ╞═╪╡         │⠀⡎⡠⠒⠉⠉⢑⢲⠦⠀⠈⠈⠪⢣⢫⡺⣹⡹⣝⠾⣻⣶⣤⡀⠀⠀⠀⠀⠀⠀        │ of relays and circuits that had    │	                                   
  │ └─┴┘  ╚═╩╝  ╙─╨╜  ╘═╧╛         │⠀⢿⡅⠀⠠⡰⡊⡎⡪⢊⠢⡠⢀⠀⠘⠜⣜⢎⡯⣳⠀⠳⣻⣿⣷⡄⠀⠀⠀⠀        │ long since grown past the point    │	                                    
  │ ┌───────────────────┐          │⠀⢹⣇⡠⠫⡪⡊⡢⢊⠨⠨⡂⢕⢐⠄⡀⠈⢺⢸⣝⡆⠀⢻⣷⣿⣿⣦⡀⠀⠀        │ where any single human could	      │                              
  │ │  ╔═══╗ Some Text  │▒         │⠀⠈⣟⢪⢇⠀⠑⠌⠢⠡⡃⠢⡑⡐⢅⢇⢆⠀⠑⢕⣯⡀⠀⢿⣿⣿⣿⣷⡀⠀        │ possibly have a firm grasp of the  │                                 
- │ │  ╚═╦═╝ in the box │▒         │⠀⣐⢵⢣⢻⣦⣀⠀⠀⠁⠈⠌⠢⡊⡜⡔⡕⡭⢆⠈⠺⡄⠀⠸⣿⣿⣿⣿⣧⠀        │ whole.			      │	  
- │ ╞═╤══╩══╤═══════════╡▒         │⠀⣵⡫⡮⡣⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠈⠘⠘⠙⠑⠀⠀⠀⠀⢿⣿⣿⣿⣿⡀        │ 				      │                             
+ │ │  ╚═╦═╝ in the box │▒         │⠀⣐⢵⢣⢻⣦⣀⠀⠀⠁⠈⠌⠢⡊⡜⡔⡕⡭⢆⠈⠺⡄⠀⠸⣿⣿⣿⣿⣧⠀        │ whole.			                  │	  
+ │ ╞═╤══╩══╤═══════════╡▒         │⠀⣵⡫⡮⡣⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠈⠘⠘⠙⠑⠀⠀⠀⠀⢿⣿⣿⣿⣿⡀        │ 				                      │                             
  │ │ ├──┬──┤           │▒         │⠀⣗⡯⣞⢵⢽⣿⣿⣿⣟⡕⡕⡤⡠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⡆        │ Multivac was self-adjusting and    │	  
  │ │ └──┴──┘           │▒         │⠀⣯⢿⣺⣝⢮⣿⣿⣿⣿⣿⡪⡮⣳⢝⡽⣲⢤⣄⡀⠀⠀⠀⠀⠈⣿⣿⣿⣿⠂        │ self-correcting. It had to be, for │                                 
  │ └───────────────────┘▒         │⠀⢸⣿⡽⣾⣳⣻⣿⣿⣿⣿⣾⡽⣺⢵⡯⣯⣿⣳⡿⣷⣦⣄⠀⠀⢿⣿⣿⡟⠀        │ nothing human could adjust and     │	                                    
@@ -39,8 +39,8 @@
  │                      ░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░                    │ issued. Certainly they, and all    │	  
  │                      ░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░                    │ others like them, were fully	      │
  │     Such powerful    ░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░                    │ entitled to share in the glory     │	  
- │                      ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░                    │ that was Multivac's.		      │
- │                      ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░  Vim and Emacs     │ 				      │
+ │                      ░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░                    │ that was Multivac's.		          │
+ │                      ░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░  Vim and Emacs     │ 				                      │
  │                      ░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░    So love         │ For decades, Multivac had helped   │
  │                      ░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░     Much forbidden │ design the ships and plot the      │	  
  │                      ░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░                    │ trajectories that enabled man to   │
@@ -56,8 +56,8 @@
  │                      ░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░                    │ to answer deeper questions more    │	  
  │                      ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░                    │ fundamentally, and on May 14,      │	  
  │ ██████╗  ██████╗  ██████╗ ███████╗███╗   ███╗ █████╗  ██████╗███████╗ │ 2061, what had been theory, became │
- │ ██╔══██╗██╔═══██╗██╔════╝ ██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝ │ fact.			      │	  
- │ ██║  ██║██║   ██║██║  ███╗█████╗  ██╔████╔██║███████║██║     ███████╗ │ 				      │
+ │ ██╔══██╗██╔═══██╗██╔════╝ ██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝ │ fact.			                  │	  
+ │ ██║  ██║██║   ██║██║  ███╗█████╗  ██╔████╔██║███████║██║     ███████╗ │ 				                      │
  │ ██║  ██║██║   ██║██║   ██║██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║ │ The energy of the sun was stored,  │
  │ ██████╔╝╚██████╔╝╚██████╔╝███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║ │ converted, and utilized directly   │
  │ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝ │ on a planet-wide scale.  All Earth │
