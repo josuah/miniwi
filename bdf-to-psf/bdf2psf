@@ -1,0 +1,788 @@
+#!/usr/bin/perl 
+
+#     bdf2psf -- convert unicode BDF fonts to Linux console fonts
+#     Copyright © 2005 Anton Zinoviev <anton@lml.bas.bg>
+#     Contains code from the bdftopsf.pl utility (Terminus font suite)
+#     Copyright © 2004 Dimitar Toshkov Zhekov
+
+#     This program is free software; you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation; either version 2 of the License, or
+#     (at your option) any later version.
+
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+
+#     If you have not received a copy of the GNU General Public License
+#     along with this program, write to the Free Software Foundation, Inc.,
+#     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+use warnings 'all';
+use strict;
+srand(0);
+
+#####################################################################
+
+# The following positions are used by the mouse driver of FreeBSD.
+# They should not be used for any important symbols in the raw fonts.
+# Notice: these depend on the way the kernel has been compiled and
+# correspond to the option "SC_MOUSE_CHAR=0x03" in the configuration file.
+my %freebsd_mouse = (0x03 => 1, 0x04 => 1, 0x05 => 1, 0x06 => 1);
+
+my $embeded_sfm = 1; # 1 = make font with sfm table, 0 = do not embed sfm table
+
+sub debug {
+    if (1) {
+	print STDERR "@_";
+    }
+}
+
+########### ARGUMENTS ###############################################
+
+if ($ARGV[0] eq "--help" || $ARGV[0] eq "-h") {
+    print STDERR <<EOT;
+Usage:
+bdf2psf [--fb|--raw][--log LOG] BDF{+BDF} EQUIV{+EQUIV} SYMB{+[:]SYMB} SIZE PSF [SFM]
+
+--fb           Create font for framebuffer.
+--raw          Create a raw font (SIZE*8 bytes)
+--log          A log file for warnings.
+BDF{+BDF}      A list of BDF fonts.  The fonts listed first take precedence
+               when several fonts define glyphs for same unicode.
+EQUIV{+EQUIV}  A list of equivalents files.  Each non-empty line in these files
+               contains a list of unicodes to be considered equal (for all of
+               them only one position number in the PSF will be reserved).
+SYMB{+SYMB}    Files containing lists of symbols to include in the PSF font.
+               Unicodes listed first take precedence.  When a file name is
+               preceeded by a colon, no warnings about missing symbols in
+               the BDF fonts will be issued.
+SIZE           Create PSF font with how many character positions
+               (usually 256 or 512).
+PSF            The new font.  If a file with this name already exists,
+               it will be overwritten
+SFM            The SFM table of the PSF font.  If a file with this name already
+               exists, it will be overwritten.  Optional.
+EOT
+    exit 0
+}
+
+my $font_type; # 0=framebuffer, 1=text video mode, 2=raw
+if ($ARGV[0] eq "--fb") {
+    $font_type = 0;
+    shift @ARGV;
+} elsif ($ARGV[0] eq "--raw") {
+    $font_type = 2;
+    shift @ARGV;
+} else {
+    $font_type = 1;
+}
+
+my $log; # the log file for issued warnings
+if ($ARGV[0] eq "--log") {
+    shift @ARGV;
+    $ARGV[0] ne "" or die "$0: --log requires a non-empty argument\n";
+    $log = $ARGV[0];
+    shift @ARGV;
+} else {
+    $log = "";
+}
+
+open LOG, ">$log" or die "$0: $log: $!\n" if ($log);
+
+my @bdfs = split /\+/, $ARGV[0];
+my @equivalents = split /\+/, $ARGV[1];
+my @symbols = split /\+/, $ARGV[2];
+my $font_size = $ARGV[3];
+my $psf = $ARGV[4];
+my $sfm = $#ARGV >= 5 ? $ARGV[5] : "";
+
+if ($font_size <= 256) {
+    $font_size = 256;
+} elsif ($font_size <= 512) {
+    $font_size = 512;
+}
+
+$font_size > 0 && $font_size <= 2048
+    or die ("$0: zero or too many characters in the PSF font ($font_size)\n");
+
+if ($font_type == 1 && $font_size > 512) {
+    die ("$0: too many characters in " 
+         ."non-framebuffer PSF font ($font_size)\n");
+}
+
+if ($font_type == 2 && $font_size > 256) {
+    die ("$0: too many characters in in a raw font ($font_size)\n");
+}
+
+
+########### GLOBAL VARIABLES #########################################
+
+my $current_line; # when reading input files (used for error messages)
+
+my $width;  # The width of the font in pixels
+my $height; # The height of the font in pixels
+
+my %glyphs; # unicode -> [the bytes of the glyph matrix]
+
+my $copy_8th = 1;          # copy the 8th column on the 9th
+my $dont_copy_8th = 2;     # do not copy the 8th column on the 9th
+my $doesnt_matter_8th = 3; # it doesn't matter
+
+my @position_type; # font position -> one of $copy_8th or $dont_copy_8th or 0
+                   # remembers whether the the graphics adapter copies the
+                   # 8th column to the 9th.  0 means the position is ocupied
+
+my %types; # unicode -> the type of the glyph (one of $copy_8th,  
+           #            $dont_copy_8th or $doesnt_matter_8th)
+           # Defined only for unicodes in the BDF fonts
+
+my %broken_pixels; # unicode -> how many pixels in the font matrix of the PSF
+                   #            font will not correspond to the original font
+
+my %equiv; # $u:unicode -> [ the equivalence class containing $u ]
+           # Used only through &equivalence_class
+
+my @sfm_table; # $c:font positon -> [ the equivalence class at $c ]
+
+my @unicode; # position in the PSF font -> unicode in the BDF fonts
+
+# cp437 -> unicode
+my @ascii2u = ( 0xfffd, 0x263a, 0x263b, 0x2665, 0x2666, 0x2663, 0x2660, 0x2022,
+                0x25d8, 0x25cb, 0x25d9, 0x2642, 0x2640, 0x266a, 0x266b, 0x263c,
+                0x25ba, 0x25c4, 0x2195, 0x203c, 0x00b6, 0x00a7, 0x25ac, 0x21a8,
+                0x2191, 0x2193, 0x2192, 0x2190, 0x221f, 0x2194, 0x25b2, 0x25bc,
+                0x0020, 0x0021, 0x0022, 0x0023, 0x0024, 0x0025, 0x0026, 0x0027,
+                0x0028, 0x0029, 0x002A, 0x002B, 0x002C, 0x002D, 0x002E, 0x002F,
+                0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037,
+                0x0038, 0x0039, 0x003A, 0x003B, 0x003C, 0x003D, 0x003E, 0x003F,
+                0x0040, 0x0041, 0x0042, 0x0043, 0x0044, 0x0045, 0x0046, 0x0047,
+                0x0048, 0x0049, 0x004A, 0x004B, 0x004C, 0x004D, 0x004E, 0x004F,
+                0x0050, 0x0051, 0x0052, 0x0053, 0x0054, 0x0055, 0x0056, 0x0057,
+                0x0058, 0x0059, 0x005A, 0x005B, 0x005C, 0x005D, 0x005E, 0x005F,
+                0x0060, 0x0061, 0x0062, 0x0063, 0x0064, 0x0065, 0x0066, 0x0067,
+                0x0068, 0x0069, 0x006A, 0x006B, 0x006C, 0x006D, 0x006E, 0x006F,
+                0x0070, 0x0071, 0x0072, 0x0073, 0x0074, 0x0075, 0x0076, 0x0077,
+                0x0078, 0x0079, 0x007A, 0x007B, 0x007C, 0x007D, 0x007E, 0x007F,
+                0x00C7, 0x00FC, 0x00E9, 0x00E2, 0x00E4, 0x00E0, 0x00E5, 0x00E7,
+                0x00EA, 0x00EB, 0x00E8, 0x00EF, 0x00EE, 0x00EC, 0x00C4, 0x00C5,
+                0x00C9, 0x00E6, 0x00C6, 0x00F4, 0x00F6, 0x00F2, 0x00FB, 0x00F9,
+                0x00FF, 0x00D6, 0x00DC, 0x00A2, 0x00A3, 0x00A5, 0x20A7, 0x0192,
+                0x00E1, 0x00ED, 0x00F3, 0x00FA, 0x00F1, 0x00D1, 0x00AA, 0x00BA,
+                0x00BF, 0x2310, 0x00AC, 0x00BD, 0x00BC, 0x00A1, 0x00AB, 0x00BB,
+                0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x2561, 0x2562, 0x2556,
+                0x2555, 0x2563, 0x2551, 0x2557, 0x255D, 0x255C, 0x255B, 0x2510,
+                0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x255E, 0x255F,
+                0x255A, 0x2554, 0x2569, 0x2566, 0x2560, 0x2550, 0x256C, 0x2567,
+                0x2568, 0x2564, 0x2565, 0x2559, 0x2558, 0x2552, 0x2553, 0x256B,
+                0x256A, 0x2518, 0x250C, 0x2588, 0x2584, 0x258C, 0x2590, 0x2580,
+                0x03B1, 0x00DF, 0x0393, 0x03C0, 0x03A3, 0x03C3, 0x00B5, 0x03C4,
+                0x03A6, 0x0398, 0x03A9, 0x03B4, 0x221E, 0x03C6, 0x03B5, 0x2229,
+                0x2261, 0x00B1, 0x2265, 0x2264, 0x2320, 0x2321, 0x00F7, 0x2248,
+                0x00B0, 0x2219, 0x00B7, 0x221A, 0x207F, 0x00B2, 0x25A0, 0x00A0
+                );
+
+# unicode -> cp437
+my %u2ascii;
+for my $i (0..255) {
+    $u2ascii{$ascii2u[$i]} = $i;
+}
+
+########### FUNCTIONS ###############################################
+
+sub warning {
+    print STDERR  "WARNING: @_";
+    print LOG  "WARNING: @_" if ("$log");
+}
+
+# How many bytes takes one row of the font matrix
+sub matrix_row_size {
+    return ($width + 7) >> 3;
+}
+
+# How many bytes takes the whole matrix of one glyph
+sub matrix_size {
+    return matrix_row_size() * $height;
+}
+
+# $u:unicode -> $u is printable symbol
+sub printable {
+    my $u = $_[0];
+    return (($u >= 0x20 && $u <= 0x7e) 
+	    || $u >= 0xa0);
+}
+
+# $u:unicode -> [ the equivalence class containing $u ]
+# If $u doesn't belong to any class yet create a singleton class
+sub equivalence_class {
+    my $u = $_[0];
+    if (! defined $equiv{$u}) {
+	$equiv{$u} = [ $u ];
+    }
+    return $equiv{$u};
+}
+
+# $u:unicode -> $u (or equivalent to $u symbol) belongs to the BOX
+# DRAWINGS area (hence it probably requires to duplicate the pixels
+# from the 8-th column to the 9-th one)
+sub is_box_drawings {
+    my $u = $_[0];
+    foreach my $v (@{equivalence_class ($u)}) {
+	if (($v >= 0x2500 && $v <= 0x2590) || ($v >= 0x2594 && $v <= 0x259f)) {
+	    return 1;
+	}
+    }
+    return 0;
+}
+
+# $u:unicode -> the CP437 code if $u or equivalent to $u symbol is
+#               a CP437 symbol; 0 otherwise
+sub ascii {
+    my $u = $_[0];
+    foreach my $v (@{equivalence_class ($u)}) {
+        if ($u2ascii{$v}) {
+            return $u2ascii{$v};
+        }
+    }
+    return 0;
+}
+
+for my $c (0 ... $font_size - 1) {
+    $position_type[$c] = $dont_copy_8th;
+}
+for my $c (0xc0 ... 0xdf) {
+    $position_type[$c] = $copy_8th;
+}
+for my $c (0x1c0 ... 0x1df) {
+    $position_type[$c] = $copy_8th;
+}
+
+# returns a position in the PSF font for a "$dont_copy_8th"-glyph
+sub dont_copy_8th_position {
+    my $u = $_[0];
+    if ($broken_pixels{$u}) {
+	warning sprintf ("U+%04X: %u broken pixel(s)\n", 
+			 $u, $broken_pixels{$u});
+    }
+    my $a = ascii($u);
+    if ($a && $position_type[$a] != 0) {
+        $position_type[$a] = 0;
+        return $a;
+    }
+    for my $c (0 ... $font_size - 1) {
+        next if ($font_type == 2 && defined $freebsd_mouse{$c});
+	if ($position_type[$c] == $dont_copy_8th) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    warning sprintf ("U+%04X: can not be positioned properly\n", $u);
+    for my $c (0 ... $font_size - 1) {
+        next if ($font_type == 2 && defined $freebsd_mouse{$c});
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    for my $c (0 ... $font_size - 1) {
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    die "Internal error\n";
+}
+
+# returns a position in the PSF font for a "$copy_8th"-glyph
+sub copy_8th_position {
+    my $u = $_[0];
+    if ($broken_pixels{$u}) {
+	warning sprintf ("U+%04X: %u broken pixel(s)\n",
+			 $u, $broken_pixels{$u});
+    }
+    my $a = ascii($u);
+    if ($a && $position_type[$a] != 0) {
+        $position_type[$a] = 0;
+        return $a;
+    }
+    for my $c (0 ... $font_size - 1) {
+        next if ($font_type == 2 && defined $freebsd_mouse{$c});
+	if ($position_type[$c] == $copy_8th) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    warning sprintf ("U+%04X: can not be positioned properly\n", $u);
+    for my $c (0 ... $font_size - 1) {
+        next if ($font_type == 2 && defined $freebsd_mouse{$c});
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    for my $c (0 ... $font_size - 1) {
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    die "Internal error\n";
+}
+
+# returns a position in the PSF font for a "$doesnt_matter_8th"-glyph
+sub doesnt_matter_8th_position {
+    my $u = $_[0];
+    if ($broken_pixels{$u}) {
+	warning sprintf ("U+%04X: %u broken pixel(s)\n",
+			 $u, $broken_pixels{$u});
+    }
+    my $a = ascii($u);
+    if ($a && $position_type[$a] != 0) {
+        $position_type[$a] = 0;
+        return $a;
+    }
+    for my $c (0 ... $font_size - 1) {
+        next if ($font_type == 2 && defined $freebsd_mouse{$c});
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    for my $c (0 ... $font_size - 1) {
+	if ($position_type[$c] != 0) {
+	    $position_type[$c] = 0;
+	    return $c;
+	}
+    }
+    die "Internal error\n";
+}
+
+# how many free positions are left the PSF font
+sub free_positions {
+    my $free = 0;
+    for my $c (0 ... $font_size - 1) {
+	if ($position_type[$c] != 0) {
+	    $free++;
+	}
+    }
+    return $free;
+}
+
+# which version of the PSF font format to use
+sub version {
+    return ($width != 8 
+	    || $height >= 256
+	    || ($font_size != 256 && $font_size != 512));
+}
+
+########### READ BDFs ################################################
+
+for my $bdf (@bdfs) {
+    my $ascent = 0;
+    my $descent = 0;
+    my $averagewidth = 0;
+    
+    $current_line = 0;
+    open (BDF, "$bdf") or die "$0: $bdf: $!\n";
+    while (<BDF>) {
+	$current_line++;
+	s/^\s*//;
+	s/\s*$//;
+	if (/^FONT_ASCENT\s+\"?([0-9]+)\"?$/) {
+	    $ascent = $1;
+	}
+	if (/^FONT_DESCENT\s+\"?([0-9]+)\"?$/) {
+	    $descent = $1;
+	}
+	if (/^AVERAGE_WIDTH\s+\"?([0-9]+)\"?$/) {
+	    $averagewidth = $1;
+	}
+	if (/^CHARS\s+\"?([0-9]+)\"?$/) {
+	    last;
+	}
+    }
+
+    if ($height) {
+	$height == $ascent + $descent
+	    or die ("$0: $bdf: the height is not the same "
+		    ."as in the previous font.\n");
+    } else {
+	$height = $ascent + $descent;
+	$height > 0 && $height <= 2400
+	    or die ("$0: $bdf: height $height zero or too big\n");
+    }
+    
+    if ($width) {
+	$width == $averagewidth / 10
+	    or die ("$0: $bdf: the width is not the same "
+		    ."as in the previous font.\n");
+    } else {
+	$averagewidth % 10 == 0
+	    or die ("$0: $bdf: the width is not integer number.\n");
+	$width = $averagewidth / 10;
+	$width > 0 && $width <= 1200
+	    or die ("$0: $bdf: width $width zero or too big\n");
+    }
+    
+    my @glyph_bytes;
+    my $u;
+    my $rows;
+    my $bbx;
+    my $beforebox;
+    my $afterbox;
+    my $shiftbits;
+    while (<BDF>) {
+	$current_line++;
+	s/^\s*//;
+	s/\s*$//;
+	if (/^STARTCHAR/) {
+	    @glyph_bytes = ();
+	    $u = -123456;
+	    $rows = 0;
+	    $bbx = 0;
+	    next;
+	}
+	if (/^BBX\s+(-?[0-9]+)\s+(-?[0-9]+)\s+(-?[0-9]+)\s+(-?[0-9]+)$/) {
+	    $beforebox = ($ascent - $4 - $2) * matrix_row_size ();
+	    $afterbox = ($descent + $4) * matrix_row_size ();
+	    $shiftbits = (matrix_row_size () - (($1 + 7) >> 3) ) * 8 - $3;
+	    $bbx = 1;
+	    next;
+	}
+	if (/^ENCODING +(.*)/) {
+	    $u = $1;
+	    next;
+	}
+	
+	if (/^(([0-9a-fA-F]{2})+)$/) {
+	    $bbx or die "$0: $bdf: no BBX at line $current_line\n";
+	    if (length($1) <= 2 * matrix_row_size ()) {
+                my $row = hex ($1);
+                if ($shiftbits > 0) {
+                    $row <<= $shiftbits;
+                } else {
+                    $row >>= -$shiftbits;
+                }
+		for my $i (1 ... matrix_row_size ()) {
+		    push (@glyph_bytes,
+			  ($row >> 8 * (matrix_row_size () - $i)) & 0xff);
+		}
+		$rows++;
+	    } else {
+		$rows = -123456;
+	    }
+	    next;
+	}
+	if (/^ENDCHAR/) {
+	    if ($rows >= 0) {
+		$rows == $height - ($beforebox + $afterbox) / matrix_row_size ()
+		    or die ("$0: $bdf: invalid number of rows $rows " 
+			    ."at line $current_line\n");
+		if ($u == -123456) {
+		    die ("$0: $bdf: missing ENCODING before ENDCHAR " 
+			 ."at line $current_line\n");
+		}
+		if (! defined $glyphs{$u}) {
+		    if ($beforebox < 0) {
+			@glyph_bytes = @glyph_bytes[-$beforebox..$#glyph_bytes];
+		    }
+		    if ($afterbox < 0) {
+			@glyph_bytes = @glyph_bytes[0 .. $#glyph_bytes+$afterbox];
+		    }
+		    $glyphs{$u} = [ (0) x $beforebox,
+				    @glyph_bytes,
+				    (0) x $afterbox];
+		}
+	    }
+	}
+	if (/^ENDFONT$/) {
+	    last; 
+	}
+    }
+    
+    close BDF;
+}
+
+########### COMPUTE THE TYPE OF EACH GLYPH ##########################
+
+if ($font_type == 0) {
+    foreach my $u (keys %glyphs) {
+	$types{$u} = $doesnt_matter_8th;
+    }
+} elsif ($font_type == 2) {
+    foreach my $u (keys %glyphs) {
+        # not the best possible assignment
+	$types{$u} = $dont_copy_8th;
+    }
+} elsif ($width == 7) {
+    foreach my $u (keys %glyphs) {
+	$types{$u} = $doesnt_matter_8th;
+	if (is_box_drawings ($u)) {
+	    for my $i (0 ... $height - 1) {
+		if ($glyphs{$u}[$i] & 0x02) {
+		    $glyphs{$u}[$i] = $glyphs{$u}[$i] | 0x01;
+		    $types{$u} = $copy_8th;
+		}
+	    }
+	}
+    }
+    $width = 8;
+} elsif ($width == 8) {
+    foreach my $u (keys %glyphs) {
+	$types{$u} = $doesnt_matter_8th;
+	for my $i (0 ... $height - 1) {
+	    if ($glyphs{$u}[$i] & 0x01) {
+		if (is_box_drawings ($u)) {
+		    $types{$u} = $copy_8th;
+		} else {
+		    $types{$u} = $dont_copy_8th;
+		}
+	    }
+	}
+    }    
+} elsif ($width == 9) {
+    foreach my $u (keys %glyphs) {
+	my $pixels9 = 0;
+	my $copyed = 0;
+	my $different = 0;
+	for my $i (0 ... $height - 1) {
+	    if (($glyphs{$u}[2 * $i] & 0x01)
+		&& ! ($glyphs{$u}[2 * $i + 1] & 0x80)) {
+		$different++;
+	    }
+	    if ($glyphs{$u}[2 * $i + 1] & 0x80) {
+		$pixels9++;
+		if (! ($glyphs{$u}[2 * $i] & 0x01)) {
+		    $glyphs{$u}[2 * $i] = $glyphs{$u}[2 * $i] | 0x01;
+		    $copyed++;
+		}
+	    }
+	}
+	if ($different < $pixels9) {
+	    $types{$u} = $copy_8th;
+	    $broken_pixels{$u} = $different + $copyed;
+	} elsif ($different > $pixels9) {
+	    $types{$u} = $dont_copy_8th;
+	    $broken_pixels{$u} = $pixels9 + $copyed;
+	} else {
+	    $types{$u} = $doesnt_matter_8th;
+	    $broken_pixels{$u} = $pixels9 + $copyed;
+	}
+	for my $i (0 ... $height - 1) {
+	    $glyphs{$u}[$i] = $glyphs{$u}[2 * $i];
+	}
+    }    
+    $width = 8;
+} else {
+    die "$0: Bad symbols width for non-framebuffer font: $width\n";
+}
+
+########### COMPUTE EQUIVALENCE CLASSES ###################################
+
+for my $equivalent (@equivalents) {
+    $current_line = 0;
+    open EQUIVALENT, $equivalent or die "$0: $equivalent: $!\n";
+    while (<EQUIVALENT>) {
+	$current_line++;
+	s/#.*//;
+	s/^[[:space:]]*//;
+	next if /^$/;
+	my $u = 0;
+	while (/^U\+([0-9a-fA-F]{1,4})[[:space:]]+(.*)/) {
+	    if (printable (hex($1))) {
+		$u = hex ($1);
+		$_ = $2;
+		last;
+	    }
+	    $_ = $2;
+	}
+	next if $u == 0;
+	
+	if (! defined $equiv{$u}) {
+	    $equiv{$u} = [ $u ];
+	}
+	while (/^U\+([0-9a-fA-F]+)[[:space:]]*(.*)/) {
+	    my $v = hex ($1);
+	    next if (! printable ($v));
+	    if (! defined $equiv{$v}) {
+		unshift @{$equiv{$u}}, $v;
+		$equiv{$v} = $equiv{$u};
+	    } elsif ($equiv{$u} != $equiv{$v}) {
+		my @vv = @{$equiv{$v}};
+		while (my $w = shift @vv) {
+		    unshift @{$equiv{$u}}, $w;
+		    $equiv{$w} = $equiv{$u};
+		}
+	    } else {
+		unshift @{$equiv{$u}}, $v;
+	    }
+	    $_ = $2;
+	}
+	if (/./) {
+	    die "$0: $equivalent: syntax error on line $current_line: $_\n";
+	}
+    }
+    close EQUIVALENT;
+}
+
+########### COMPUTE SFM ################################################
+
+my @requested;
+my %issue_warnings;
+my @delayed;
+my %positioned;
+
+for my $symbolfile (@symbols) {
+    my $warnings = ! ($symbolfile =~ s/^://);
+    $current_line = 0;
+    open SYMBOLS, $symbolfile or die "$0: $symbolfile: $!\n";
+    while (<SYMBOLS>) {
+	$current_line++;
+	s/#.*//;
+	s/^[[:space:]]*//;
+	next if /^$/;
+	/^U\+([0-9a-fA-F]+)[[:space:]]*$/ 
+	    or die "$0: $symbolfile: syntax error on line $current_line: $_\n";
+	my $u = hex ($1);
+	push @requested, $u;
+	$issue_warnings{$u} = 1 if ($warnings);
+    }
+    close SYMBOLS;
+}
+
+for my $u (@requested) {
+    next if ($positioned{$u});
+    next if (! printable ($u));
+    my $defined_glyph = 0;
+    if (@delayed < free_positions ()) {
+        foreach my $v (@{equivalence_class ($u)}) {
+            next if ! defined $glyphs{$v};
+            $defined_glyph = 1;
+            if ($types{$v} == $dont_copy_8th) {
+                my $position = dont_copy_8th_position ($v);
+                $sfm_table[$position] = equivalence_class ($v);
+            } elsif ($types{$v} == $copy_8th) {
+                my $position = copy_8th_position ($v);
+                $sfm_table[$position] = equivalence_class ($v);
+            } elsif (ascii($v)) {
+                my $position = doesnt_matter_8th_position ($v);
+                $sfm_table[$position] = equivalence_class ($v);
+            } else {
+                push @delayed, $v;
+            }
+            foreach my $w (@{equivalence_class ($u)}) {
+                $positioned{$w} = 1;
+            }
+            last;
+        }
+        if (! $defined_glyph && $font_type == 2) {
+            my $position = dont_copy_8th_position ($u);
+            $sfm_table[$position] = equivalence_class ($u);
+            foreach my $w (@{equivalence_class ($u)}) {
+                $positioned{$w} = 1;
+            }
+        }
+    }
+    if (defined $issue_warnings{$u} && ! $positioned{$u}) {
+	if ($defined_glyph) {
+	    warning sprintf ("U+%04X: no space in the font\n", $u);
+	} else {
+	    warning sprintf ("U+%04X: no glyph defined\n", $u);
+	}
+    }
+}
+
+foreach my $u (@delayed) {
+    my $position = doesnt_matter_8th_position ($u);
+    $sfm_table[$position] = equivalence_class ($u);
+}
+
+if ($sfm) {
+    open SFM, ">$sfm" or die "$0: $sfm: $!\n";
+    for my $c (0 ... $font_size - 1) {
+	printf SFM "0x%02x    ", $c;
+	foreach my $u (@{$sfm_table[$c]}) {
+	    printf SFM " U+%04x", $u;
+	}
+	print SFM "\n";
+    }
+    close SFM;
+}
+
+######### WRITE PSF ##############################################
+
+for my $c (0 ... $font_size - 1) {
+    foreach my $u (@{$sfm_table[$c]}) {
+	if (! defined $unicode[$c] && defined $glyphs{$u}) {
+	    $unicode[$c] = $u;
+	    last;
+	}
+    }
+}
+
+open (PSF, ">$psf") || die ("$0: $psf: $!\n");
+binmode (PSF) || die ("$0: $psf: $!\n");
+
+if ($font_type != 2) {
+    if (version () == 0) { 
+        printf PSF "%c%c", 0x36, 0x04;
+        printf PSF "%c%c", ($font_size == 512) + $embeded_sfm * 2, $height;
+    } else {
+        printf PSF "%c%c%c%c", 0x72, 0xB5, 0x4A, 0x86;
+        printf PSF "%c%c%c%c", 0x00, 0x00, 0x00, 0x00;
+        printf PSF "%c%c%c%c", 0x20, 0x00, 0x00, 0x00;
+        printf PSF "%c", $embeded_sfm;
+        printf PSF "%c%c%c", 0x00, 0x00, 0x00;
+        printf PSF "%c%c", $font_size & 0xFF, $font_size >> 8;
+        printf PSF "%c%c", 0x00, 0x00;
+        printf PSF "%c%c%c", matrix_size () & 0xFF,
+                            (matrix_size () >> 8)
+                                & 0xFF, matrix_size () >> 16;
+        printf PSF "%c", 0x00;
+        printf PSF "%c%c", $height & 0xFF, $height >> 8;
+        printf PSF "%c%c", 0x00, 0x00;
+        printf PSF "%c%c", $width & 0xFF, $width >> 8;
+        printf PSF "%c%c", 0x00, 0x00;
+    }
+}
+
+for my $c (0 ... $font_size - 1) {
+    for my $i (0 ... matrix_size () - 1) {
+	if (defined $unicode[$c]) {
+	    printf PSF "%c", $glyphs{$unicode[$c]}[$i];
+	} else {
+	    printf PSF "%c", int(rand(256));
+	}
+    }
+}
+
+if ($font_type != 2 && $embeded_sfm) {
+    for my $c (0 ... $font_size - 1) {
+	if (defined $sfm_table[$c]) {
+	    foreach (@{$sfm_table[$c]}) {
+		if (version () == 0) { 
+		    printf PSF "%c%c", $_ & 0xFF, $_ >> 8;
+		} elsif ($_ <= 0x7F) {
+		    printf PSF "%c", $_;
+		} else {
+		    if ($_ <= 0x7FF) { 
+			printf PSF "%c", 0xC0 + ($_ >> 6);
+		    } else {
+			printf PSF "%c", 0xE0 + ($_ >> 12);
+			printf PSF "%c", 0x80 + (($_ >> 6) & 0x3F);
+		    }
+		    printf PSF "%c", 0x80 + ($_ & 0x3F);
+		}
+	    }
+	}
+	printf PSF "%c", 0xFF;
+	if (version () == 0) {
+	    printf PSF "%c", 0xFF;
+	}
+    }
+}
+
+close PSF;
+
+close LOG;
