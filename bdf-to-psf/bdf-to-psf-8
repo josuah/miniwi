@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 
 #     bdf2psf -- convert unicode BDF fonts to Linux console fonts
 #     Copyright © 2005 Anton Zinoviev <anton@lml.bas.bg>
@@ -107,7 +107,7 @@ $font_size > 0 && $font_size <= 2048
     or die ("$0: zero or too many characters in the PSF font ($font_size)\n");
 
 if ($font_type == 1 && $font_size > 512) {
-    die ("$0: too many characters in " 
+    die ("$0: too many characters in "
          ."non-framebuffer PSF font ($font_size)\n");
 }
 
@@ -133,7 +133,7 @@ my @position_type; # font position -> one of $copy_8th or $dont_copy_8th or 0
                    # remembers whether the the graphics adapter copies the
                    # 8th column to the 9th.  0 means the position is ocupied
 
-my %types; # unicode -> the type of the glyph (one of $copy_8th,  
+my %types; # unicode -> the type of the glyph (one of $copy_8th,
            #            $dont_copy_8th or $doesnt_matter_8th)
            # Defined only for unicodes in the BDF fonts
 
@@ -208,7 +208,7 @@ sub matrix_size {
 # $u:unicode -> $u is printable symbol
 sub printable {
     my $u = $_[0];
-    return (($u >= 0x20 && $u <= 0x7e) 
+    return (($u >= 0x20 && $u <= 0x7e)
 	    || $u >= 0xa0);
 }
 
@@ -261,7 +261,7 @@ for my $c (0x1c0 ... 0x1df) {
 sub dont_copy_8th_position {
     my $u = $_[0];
     if ($broken_pixels{$u}) {
-	warning sprintf ("U+%04X: %u broken pixel(s)\n", 
+	warning sprintf ("U+%04X: %u broken pixel(s)\n",
 			 $u, $broken_pixels{$u});
     }
     my $a = ascii($u);
@@ -370,7 +370,7 @@ sub free_positions {
 
 # which version of the PSF font format to use
 sub version {
-    return ($width != 8 
+    return ($width != 8
 	    || $height >= 256
 	    || ($font_size != 256 && $font_size != 512));
 }
@@ -381,7 +381,7 @@ for my $bdf (@bdfs) {
     my $ascent = 0;
     my $descent = 0;
     my $averagewidth = 0;
-    
+
     $current_line = 0;
     open (BDF, "$bdf") or die "$0: $bdf: $!\n";
     while (<BDF>) {
@@ -411,9 +411,9 @@ for my $bdf (@bdfs) {
 	$height > 0 && $height <= 2400
 	    or die ("$0: $bdf: height $height zero or too big\n");
     }
-    
+
     $width = 4;
-    
+
     my @glyph_bytes;
     my $u;
     my $rows;
@@ -466,10 +466,10 @@ for my $bdf (@bdfs) {
 	if (/^ENDCHAR/) {
 	    if ($rows >= 0) {
 		$rows == $height - ($beforebox + $afterbox) / matrix_row_size ()
-		    or die ("$0: $bdf: invalid number of rows $rows " 
+		    or die ("$0: $bdf: invalid number of rows $rows "
 			    ."at line $current_line\n");
 		if ($u == -123456) {
-		    die ("$0: $bdf: missing ENCODING before ENDCHAR " 
+		    die ("$0: $bdf: missing ENCODING before ENDCHAR "
 			 ."at line $current_line\n");
 		}
 		if (! defined $glyphs{$u}) {
@@ -486,10 +486,10 @@ for my $bdf (@bdfs) {
 	    }
 	}
 	if (/^ENDFONT$/) {
-	    last; 
+	    last;
 	}
     }
-    
+
     close BDF;
 }
 
@@ -529,7 +529,7 @@ if ($font_type == 0) {
 		}
 	    }
 	}
-    }    
+    }
 } elsif ($width == 9) {
     foreach my $u (keys %glyphs) {
 	my $pixels9 = 0;
@@ -561,7 +561,7 @@ if ($font_type == 0) {
 	for my $i (0 ... $height - 1) {
 	    $glyphs{$u}[$i] = $glyphs{$u}[2 * $i];
 	}
-    }    
+    }
     $width = 8;
 } else {
     die "$0: Bad symbols width for non-framebuffer font: $width\n";
@@ -631,7 +631,7 @@ for my $symbolfile (@symbols) {
 	s/#.*//;
 	s/^[[:space:]]*//;
 	next if /^$/;
-	/^U\+([0-9a-fA-F]+)[[:space:]]*$/ 
+	/^U\+([0-9a-fA-F]+)[[:space:]]*$/
 	    or die "$0: $symbolfile: syntax error on line $current_line: $_\n";
 	my $u = hex ($1);
 	push @requested, $u;
@@ -714,7 +714,7 @@ open (PSF, ">$psf") || die ("$0: $psf: $!\n");
 binmode (PSF) || die ("$0: $psf: $!\n");
 
 if ($font_type != 2) {
-    if (version () == 0) { 
+    if (version () == 0) {
         printf PSF "%c%c", 0x36, 0x04;
         printf PSF "%c%c", ($font_size == 512) + $embeded_sfm * 2, $height;
     } else {
@@ -750,12 +750,12 @@ if ($font_type != 2 && $embeded_sfm) {
     for my $c (0 ... $font_size - 1) {
 	if (defined $sfm_table[$c]) {
 	    foreach (@{$sfm_table[$c]}) {
-		if (version () == 0) { 
+		if (version () == 0) {
 		    printf PSF "%c%c", $_ & 0xFF, $_ >> 8;
 		} elsif ($_ <= 0x7F) {
 		    printf PSF "%c", $_;
 		} else {
-		    if ($_ <= 0x7FF) { 
+		    if ($_ <= 0x7FF) {
 			printf PSF "%c", 0xC0 + ($_ >> 6);
 		    } else {
 			printf PSF "%c", 0xE0 + ($_ >> 12);

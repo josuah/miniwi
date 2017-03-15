@@ -18,7 +18,7 @@ It support the characters from these encodings:
 
 - ASCII characters (easy!)
 - ISO 8859-{1, 2, 3, 4, 9, 10, 13, 14} (Latin 0 to 8)
-- ISO 8859-5 and KOI8-R (Cyrilic) 
+- ISO 8859-5 and KOI8-R (Cyrilic)
 - ISO 8859-6 (Arabic)
 - ISO 8859-7 (Greek)
 - ISO 8859-8 (Hebrew)
