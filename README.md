@@ -1,7 +1,7 @@
 Miniwi font
 ================================================================================
 
-# I am moving from Github to my [own git server](http://nas.josuah.net/josuah.net)
+# I am moving from Github to my [own git server](http://nas.josuah.net/josuah.net:70/1/git/miniwi.git)
 
 This is a font in a 8x4 format (including spaces), made from scratch, but with
 inspiration from the [tom
