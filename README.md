@@ -1,6 +1,8 @@
 Miniwi font
 ================================================================================
 
+# I am moving from Github to my [own git server](http://nas.josuah.net/josuah.net)
+
 This is a font in a 8x4 format (including spaces), made from scratch, but with
 inspiration from the [tom
 thumb](http://robey.lag.net/2010/01/23/tiny-monospace-font.html) font (thank
