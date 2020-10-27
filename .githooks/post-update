@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+git hooks run stagit
+git hooks run stagit-gopher
+git hooks run make-dist
