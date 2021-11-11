@@ -1,0 +1,10 @@
+BDF2TXT and TXT2BDF
+------------------------------------------------------------------------
+This two little tools are useful for translating bdf fonts to a textual
+representation, which can be edited with any text editor, and back.
+Take a look at chess.bdf and chess.txt for an example...
+
+There is nearly no error checking, especially the BBX statements must be
+`handcoded' when changing the size of a glyph.
+
+Have fun ;-)
